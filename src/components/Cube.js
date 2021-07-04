@@ -1,7 +1,7 @@
 import React from 'react';
 import { useBox } from 'use-cannon';
 
-import * as texture from '../textures'
+import * as textures from '../textures'
 
 export const Cube = ({ position, type, ...props }) => {
   const [ref] = useBox(() => {
@@ -14,6 +14,13 @@ export const Cube = ({ position, type, ...props }) => {
 
   return (
     <mesh castShadow ref={ref}>
+      {[Array(6)].map((_, index) => (
+        <meshStandardMaterial
+          attach="material"
+          map={textures[type]}
+          key={index}
+        />
+      ))}
       <boxBufferGeometry attach="geometry" />
     </mesh>
   )
